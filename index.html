@@ -26,9 +26,16 @@
       padding: 0;
       font-family: var(--font-body);
       background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #bbf7d0 45.2%, #86efac 78%, #4ade80 100%);
-      min-height: 100vh;
+      min-height: 100dvh;
       overflow-x: hidden;
       color: #1e293b;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        height: 100dvh;
+        overflow: hidden;
+      }
     }
 
     h1, h2, h3, .font-display {
@@ -138,15 +145,16 @@
     .play-arena {
       position: relative;
       width: 100%;
-      min-height: 430px;
-      height: clamp(430px, 58vh, 560px);
-      border-radius: 2rem;
+      flex: 1 1 auto;
+      min-height: 220px;
+      height: auto;
+      border-radius: 1.5rem;
       overflow: hidden;
       background:
         radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.75) 0%, transparent 28%),
         linear-gradient(180deg, #bae6fd 0%, #e0f2fe 42%, #bbf7d0 42.5%, #86efac 76%, #4ade80 100%);
-      border: 5px solid #ffffff;
-      box-shadow: inset 0 4px 20px rgba(255, 255, 255, 0.7), 0 14px 30px rgba(14, 116, 144, 0.16);
+      border: 4px solid #ffffff;
+      box-shadow: inset 0 4px 20px rgba(255, 255, 255, 0.7), 0 12px 24px rgba(14, 116, 144, 0.14);
       touch-action: none;
     }
 
@@ -161,10 +169,9 @@
 
     @media (max-width: 640px) {
       .play-arena {
-        min-height: 390px;
-        height: 54vh;
-        border-radius: 1.5rem;
-        border-width: 4px;
+        min-height: 240px;
+        border-radius: 1.25rem;
+        border-width: 3px;
       }
     }
   </style>
@@ -186,32 +193,32 @@
   </div>
 
   <!-- Main App Container -->
-  <div id="app" class="relative z-10 max-w-6xl mx-auto px-3 sm:px-6 py-3 sm:py-5 flex flex-col gap-3 sm:gap-4">
+  <div id="app" class="relative z-10 max-w-6xl mx-auto px-2.5 sm:px-5 py-2 sm:py-2.5 flex flex-col gap-1.5 sm:gap-2 min-h-dvh md:h-dvh">
 
     <!-- Top Header & Gentle Competitive Star Race Bar -->
-    <header class="bg-white/95 backdrop-blur-md rounded-3xl border-4 border-white shadow-lg px-4 py-3 sm:px-6 sm:py-4 flex flex-col gap-3">
+    <header class="bg-white/95 backdrop-blur-md rounded-2xl border-2 sm:border-4 border-white shadow-md px-3 py-1.5 sm:px-4 sm:py-2 flex flex-col gap-1.5 shrink-0">
       <div class="flex flex-wrap items-center justify-between gap-2">
         <!-- Brand Title + Active Character Badge -->
-        <div class="flex items-center gap-3">
-          <div id="header-avatar" class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-pink-100 border-2 border-pink-300 flex items-center justify-center shadow-inner animate-float"></div>
+        <div class="flex items-center gap-2.5">
+          <div id="header-avatar" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-pink-100 border-2 border-pink-300 flex items-center justify-center shadow-inner animate-float shrink-0"></div>
           <div>
-            <h1 class="font-display text-xl sm:text-2xl md:text-3xl font-bold text-pink-600 leading-tight tracking-tight">
+            <h1 class="font-display text-base sm:text-xl md:text-2xl font-bold text-pink-600 leading-tight tracking-tight">
               Peppa's Mouse &amp; Keyboard Star Kit
             </h1>
-            <p class="text-xs sm:text-sm font-bold text-slate-600">
-              Click, type, &amp; collect stars with Peppa &amp; friends!
+            <p class="hidden sm:block text-xs font-bold text-slate-600 leading-none">
+              Click, drag, type, &amp; collect stars with Peppa &amp; friends!
             </p>
           </div>
         </div>
 
         <!-- Parent / Toddler Settings & Sound Controls -->
-        <div class="flex items-center gap-2">
-          <button id="btn-sound" type="button" class="toy-btn bg-amber-300 hover:bg-amber-200 text-amber-950 font-display font-bold text-xs sm:text-sm px-3.5 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer" aria-label="Toggle Sound">
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <button id="btn-sound" type="button" class="toy-btn bg-amber-300 hover:bg-amber-200 text-amber-950 font-display font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1 cursor-pointer" aria-label="Toggle Sound">
             <span id="sound-icon">🔊</span>
             <span id="sound-label">Sound On</span>
           </button>
 
-          <button id="btn-parent-toggle" type="button" class="toy-btn bg-sky-100 hover:bg-sky-200 text-sky-900 font-display font-bold text-xs sm:text-sm px-3.5 py-2 rounded-2xl flex items-center gap-1.5 cursor-pointer" aria-expanded="false">
+          <button id="btn-parent-toggle" type="button" class="toy-btn bg-sky-100 hover:bg-sky-200 text-sky-900 font-display font-bold text-xs px-3 py-1.5 rounded-xl flex items-center gap-1 cursor-pointer" aria-expanded="false">
             <span>⚙️</span>
             <span>Grown-Up Helper</span>
           </button>
@@ -219,7 +226,7 @@
       </div>
 
       <!-- Collapsible Grown-Up Helper Drawer (No modal clutter, gentle options) -->
-      <div id="parent-drawer" class="hidden bg-sky-50/95 border-2 border-sky-200 rounded-2xl p-3 sm:p-4 text-sm">
+      <div id="parent-drawer" class="hidden bg-sky-50/95 border-2 border-sky-200 rounded-xl p-2 sm:p-2.5 text-xs">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex flex-wrap items-center gap-2">
             <span class="font-display font-bold text-sky-900 mr-1">Pace:</span>
@@ -264,17 +271,17 @@
       </div>
 
       <!-- Friendly Star Race Track (Gentle Competition Toward Castle Crown) -->
-      <div class="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-100 rounded-2xl border-2 border-amber-200 px-3 sm:px-5 py-2.5">
-        <div class="flex items-center justify-between text-xs sm:text-sm font-display font-bold mb-1.5">
-          <span class="text-amber-900 flex items-center gap-1.5">
+      <div class="bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-100 rounded-xl border border-amber-200 px-2.5 sm:px-4 py-1.5">
+        <div class="flex flex-wrap items-center justify-between gap-1 text-[11px] sm:text-xs font-display font-bold mb-1">
+          <span class="text-amber-900 flex items-center gap-1">
             <span>🏁</span>
             <span id="race-title">Star Race to Muddy Castle!</span>
           </span>
-          <div class="flex items-center gap-3">
-            <span id="player-score-pill" class="bg-pink-500 text-white px-2.5 py-0.5 rounded-full shadow-sm">
+          <div class="flex items-center gap-2">
+            <span id="player-score-pill" class="bg-pink-500 text-white px-2 py-0.5 rounded-full shadow-2xs">
               ⭐ You: 0
             </span>
-            <span id="buddy-score-pill" class="bg-sky-500 text-white px-2.5 py-0.5 rounded-full shadow-sm">
+            <span id="buddy-score-pill" class="bg-sky-500 text-white px-2 py-0.5 rounded-full shadow-2xs">
               🐷 George: 0
             </span>
             <span class="text-amber-800">👑 Goal: <span id="goal-target-num">12</span></span>
@@ -282,98 +289,98 @@
         </div>
 
         <!-- Visual Track -->
-        <div class="relative h-9 sm:h-10 bg-emerald-200/80 rounded-full border-2 border-emerald-400/70 overflow-visible flex items-center px-2">
+        <div class="relative h-7 sm:h-8 bg-emerald-200/80 rounded-full border-2 border-emerald-400/70 overflow-visible flex items-center px-2">
           <!-- Muddy puddle markers along track -->
           <div class="w-full flex justify-between px-6 sm:px-10 opacity-45 pointer-events-none" aria-hidden="true">
-            <span class="w-6 h-2.5 bg-amber-800/50 rounded-full"></span>
-            <span class="w-8 h-3 bg-amber-800/50 rounded-full"></span>
-            <span class="w-6 h-2.5 bg-amber-800/50 rounded-full"></span>
+            <span class="w-5 h-2 bg-amber-800/50 rounded-full"></span>
+            <span class="w-7 h-2 bg-amber-800/50 rounded-full"></span>
+            <span class="w-5 h-2 bg-amber-800/50 rounded-full"></span>
           </div>
 
           <!-- Buddy Marker (Gentle pace, never discourages) -->
-          <div id="buddy-runner" class="absolute -top-2.5 transition-all duration-500 ease-out flex flex-col items-center z-10" style="left: 2%;">
-            <span class="text-[10px] font-bold bg-sky-600 text-white px-1.5 rounded-full leading-tight shadow" id="buddy-runner-label">Buddy</span>
-            <div id="buddy-runner-icon" class="w-7 h-7 sm:w-8 sm:h-8"></div>
+          <div id="buddy-runner" class="absolute -top-2 transition-all duration-500 ease-out flex flex-col items-center z-10" style="left: 2%;">
+            <span class="text-[9px] font-bold bg-sky-600 text-white px-1 rounded-full leading-none shadow" id="buddy-runner-label">Buddy</span>
+            <div id="buddy-runner-icon" class="w-6 h-6 sm:w-7 sm:h-7"></div>
           </div>
 
           <!-- Player Marker -->
-          <div id="player-runner" class="absolute -top-3 transition-all duration-500 ease-out flex flex-col items-center z-20" style="left: 2%;">
-            <span class="text-[10px] font-bold bg-pink-600 text-white px-1.5 rounded-full leading-tight shadow">YOU</span>
-            <div id="player-runner-icon" class="w-8 h-8 sm:w-9 sm:h-9"></div>
+          <div id="player-runner" class="absolute -top-2.5 transition-all duration-500 ease-out flex flex-col items-center z-20" style="left: 2%;">
+            <span class="text-[9px] font-bold bg-pink-600 text-white px-1 rounded-full leading-none shadow">YOU</span>
+            <div id="player-runner-icon" class="w-7 h-7 sm:w-8 sm:h-8"></div>
           </div>
 
           <!-- Castle Goal on Right -->
-          <div class="ml-auto -mr-1 text-2xl sm:text-3xl drop-shadow" title="Muddy Castle">🏰</div>
+          <div class="ml-auto -mr-0.5 text-xl sm:text-2xl drop-shadow" title="Muddy Castle">🏰</div>
         </div>
       </div>
     </header>
 
     <!-- Character Selector Strip (Peppa Pig Featured + Cartoon Friends) -->
-    <section aria-label="Choose Your Character" class="bg-white/90 backdrop-blur-sm rounded-3xl border-4 border-white shadow-md px-3 sm:px-5 py-2.5">
-      <div class="flex items-center justify-between gap-2 mb-2">
-        <span class="font-display text-sm sm:text-base font-bold text-slate-700">
-          ✨ Pick Your Character:
+    <section aria-label="Choose Your Character" class="bg-white/90 backdrop-blur-sm rounded-2xl border-2 sm:border-4 border-white shadow-sm px-2.5 sm:px-4 py-1.5 shrink-0">
+      <div class="flex items-center justify-between gap-2 mb-1">
+        <span class="font-display text-xs sm:text-sm font-bold text-slate-700">
+          ✨ Pick Character:
         </span>
-        <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2.5 py-0.5 rounded-full border border-pink-200">
+        <span class="hidden sm:inline text-[11px] font-bold text-pink-600 bg-pink-50 px-2 py-0.5 rounded-full border border-pink-200">
           Peppa Pig &amp; Friends
         </span>
       </div>
 
-      <div id="character-roster" class="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-2.5">
+      <div id="character-roster" class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2">
         <!-- Populated dynamically via JS with custom SVG portraits -->
       </div>
     </section>
 
-    <!-- 3 Mini-Game Mode Tabs -->
-    <nav aria-label="Training Modes" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
-      <button data-mode="puddles" type="button" class="mode-tab toy-btn bg-pink-500 text-white rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer ring-4 ring-pink-200">
-        <span class="text-2xl bg-white/20 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">💧</span>
-        <div>
-          <div class="font-display font-bold text-sm sm:text-base leading-tight">1. Muddy Puddle Pop</div>
-          <div class="text-[11px] text-pink-100 font-semibold">Move mouse &amp; click splashes!</div>
+    <!-- 4 Mini-Game Mode Tabs -->
+    <nav aria-label="Training Modes" class="grid grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-2 shrink-0">
+      <button data-mode="puddles" type="button" class="mode-tab toy-btn bg-pink-500 text-white rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer ring-2 ring-pink-200">
+        <span class="text-lg sm:text-xl bg-white/20 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">💧</span>
+        <div class="min-w-0">
+          <div class="font-display font-bold text-xs sm:text-sm leading-tight truncate">1. Muddy Puddle Pop</div>
+          <div class="hidden sm:block text-[10px] text-pink-100 font-semibold leading-tight truncate">Move mouse &amp; click splashes!</div>
         </div>
       </button>
 
-      <button data-mode="dragdrop" type="button" class="mode-tab toy-btn bg-white hover:bg-rose-50 text-slate-800 rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer border-2 border-rose-200">
-        <span class="text-2xl bg-rose-100 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">🧺</span>
-        <div>
-          <div class="font-display font-bold text-sm sm:text-base leading-tight">2. Drag &amp; Drop Picnic</div>
-          <div class="text-[11px] text-slate-600 font-semibold">Hold, drag &amp; drop to spots!</div>
+      <button data-mode="dragdrop" type="button" class="mode-tab toy-btn bg-white hover:bg-rose-50 text-slate-800 rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer border-2 border-rose-200">
+        <span class="text-lg sm:text-xl bg-rose-100 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">🧺</span>
+        <div class="min-w-0">
+          <div class="font-display font-bold text-xs sm:text-sm leading-tight truncate">2. Drag &amp; Drop Picnic</div>
+          <div class="hidden sm:block text-[10px] text-slate-600 font-semibold leading-tight truncate">Hold, drag &amp; drop to spots!</div>
         </div>
       </button>
 
-      <button data-mode="typing" type="button" class="mode-tab toy-btn bg-white hover:bg-amber-50 text-slate-800 rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer border-2 border-amber-200">
-        <span class="text-2xl bg-amber-100 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">⌨️</span>
-        <div>
-          <div class="font-display font-bold text-sm sm:text-base leading-tight">3. ABC &amp; Number Jump</div>
-          <div class="text-[11px] text-slate-600 font-semibold">Press keys on the keyboard!</div>
+      <button data-mode="typing" type="button" class="mode-tab toy-btn bg-white hover:bg-amber-50 text-slate-800 rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer border-2 border-amber-200">
+        <span class="text-lg sm:text-xl bg-amber-100 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">⌨️</span>
+        <div class="min-w-0">
+          <div class="font-display font-bold text-xs sm:text-sm leading-tight truncate">3. ABC &amp; Number Jump</div>
+          <div class="hidden sm:block text-[10px] text-slate-600 font-semibold leading-tight truncate">Press keys on the keyboard!</div>
         </div>
       </button>
 
-      <button data-mode="dash" type="button" class="mode-tab toy-btn bg-white hover:bg-emerald-50 text-slate-800 rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer border-2 border-emerald-200">
-        <span class="text-2xl bg-emerald-100 w-10 h-10 rounded-xl flex items-center justify-center shrink-0">🥕</span>
-        <div>
-          <div class="font-display font-bold text-sm sm:text-base leading-tight">4. Snack &amp; Puddle Dash</div>
-          <div class="text-[11px] text-slate-600 font-semibold">Arrow keys, WASD, or click!</div>
+      <button data-mode="dash" type="button" class="mode-tab toy-btn bg-white hover:bg-emerald-50 text-slate-800 rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer border-2 border-emerald-200">
+        <span class="text-lg sm:text-xl bg-emerald-100 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">🥕</span>
+        <div class="min-w-0">
+          <div class="font-display font-bold text-xs sm:text-sm leading-tight truncate">4. Snack &amp; Puddle Dash</div>
+          <div class="hidden sm:block text-[10px] text-slate-600 font-semibold leading-tight truncate">Arrow keys, WASD, or click!</div>
         </div>
       </button>
     </nav>
 
     <!-- Main Interactive Play Stage -->
-    <main class="bg-white/90 backdrop-blur-md rounded-3xl border-4 border-white shadow-xl p-3 sm:p-5 flex flex-col gap-3">
+    <main class="bg-white/90 backdrop-blur-md rounded-2xl border-2 sm:border-4 border-white shadow-lg p-2 sm:p-3 flex-1 min-h-0 flex flex-col gap-1.5 sm:gap-2">
       <!-- Friendly Prompt & Sub-Controls Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-2 bg-gradient-to-r from-sky-50 via-pink-50 to-amber-50 border-2 border-sky-100 rounded-2xl px-3.5 py-2.5">
-        <div class="flex items-center gap-2.5">
-          <span id="cue-badge" class="bg-amber-400 text-amber-950 font-display font-bold text-xs sm:text-sm px-3 py-1 rounded-full shadow-sm animate-pulse-soft">
+      <div class="flex flex-wrap items-center justify-between gap-1.5 bg-gradient-to-r from-sky-50 via-pink-50 to-amber-50 border border-sky-100 rounded-xl px-2.5 py-1.5 shrink-0">
+        <div class="flex items-center gap-2 min-w-0">
+          <span id="cue-badge" class="bg-amber-400 text-amber-950 font-display font-bold text-[11px] sm:text-xs px-2.5 py-0.5 rounded-full shadow-2xs animate-pulse-soft shrink-0">
             🖱️ Mouse Tip
           </span>
-          <p id="friendly-prompt" class="font-display font-bold text-sm sm:text-base md:text-lg text-slate-800">
+          <p id="friendly-prompt" class="font-display font-bold text-xs sm:text-sm md:text-base text-slate-800 truncate">
             Move your mouse and click the big muddy puddles with Peppa!
           </p>
         </div>
 
         <!-- Mode-specific quick toggle pills -->
-        <div id="mode-subcontrols" class="flex items-center gap-2 flex-wrap">
+        <div id="mode-subcontrols" class="flex items-center gap-1.5 flex-wrap">
           <!-- Injected per mode -->
         </div>
       </div>
@@ -407,12 +414,12 @@
       </div>
 
       <!-- Helpful On-Screen Key & Mouse Trainer Strip (Great for toddlers learning physical keyboard/mouse) -->
-      <div id="trainer-footer" class="bg-slate-50 border-2 border-slate-200/80 rounded-2xl px-3.5 py-2.5 flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-bold text-slate-600">
-        <div id="trainer-status-left" class="flex items-center gap-2">
-          <span class="inline-flex items-center justify-center w-6 h-6 rounded-lg bg-pink-100 text-pink-700 font-display">👆</span>
-          <span>Tip: Touchscreens work too, but using the <strong>real mouse</strong> or <strong>computer keys</strong> builds big computer skills!</span>
+      <div id="trainer-footer" class="bg-slate-50 border border-slate-200/80 rounded-xl px-2.5 py-1 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs font-bold text-slate-600 shrink-0">
+        <div id="trainer-status-left" class="flex items-center gap-1.5 truncate">
+          <span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-pink-100 text-pink-700 font-display shrink-0">👆</span>
+          <span class="truncate">Tip: Using a <strong>real mouse</strong> or <strong>keyboard</strong> builds big computer skills!</span>
         </div>
-        <div id="last-input-badge" class="bg-white border border-slate-200 rounded-xl px-3 py-1 font-display text-slate-700 shadow-2xs">
+        <div id="last-input-badge" class="bg-white border border-slate-200 rounded-lg px-2.5 py-0.5 font-display text-slate-700 shadow-2xs shrink-0">
           Last Action: <span id="last-action-text" class="text-pink-600">Ready!</span>
         </div>
       </div>
@@ -782,13 +789,13 @@
       characterId: 'peppa',
       mode: 'puddles', // 'puddles' | 'dragdrop' | 'typing' | 'dash'
       pace: 'gentle',  // 'gentle' | 'speedy'
-      raceMode: 'buddy', // 'buddy' | 'goal'
-      goalStars: 12,
-      playerStars: 0,
-      buddyStars: 0,
-      celebrated: false,
-      // Mode 1 options
-      puddleStyle: 'big', // 'big' | 'bouncy'
+      // Mode 1 options & multi-level mouse mini-games
+      puddleStyle: 'auto', // 'auto' | 'big' | 'bouncy' | 'butterflies' | 'bushes' | 'stars'
+      mouseLevel: 1,       // 1..5
+      mouseLevelHits: 0,
+      mouseLevelTarget: 4,
+      mouseMoverRaf: null,
+      mouseMovers: [],
       // Mode 2 Drag & Drop state
       dragPack: 'friends', // 'friends' | 'treats'
       dragRoundTokens: [],
@@ -816,20 +823,38 @@
       switch (charId) {
         case 'george':
           return `
-            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
-              <ellipse cx="52" cy="56" rx="28" ry="23" fill="#f9a8d4" stroke="#db2777" stroke-width="3"/>
-              <ellipse cx="30" cy="48" rx="14" ry="11" fill="#f9a8d4" stroke="#db2777" stroke-width="3"/>
-              <circle cx="24" cy="48" r="2.5" fill="#be185d"/>
-              <circle cx="30" cy="48" r="2.5" fill="#be185d"/>
-              <circle cx="35" cy="43" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="36" cy="43" r="2" fill="#1e293b"/>
-              <circle cx="45" cy="43" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="46" cy="43" r="2" fill="#1e293b"/>
-              <circle cx="44" cy="53" r="5" fill="#f472b6" opacity="0.65"/>
-              <path d="M26 57 Q33 62 40 57" fill="none" stroke="#9d174d" stroke-width="2.5" stroke-linecap="round"/>
-              <rect x="38" y="76" width="8" height="12" rx="4" fill="#f9a8d4" stroke="#db2777" stroke-width="2.5"/>
-              <rect x="56" y="76" width="8" height="12" rx="4" fill="#f9a8d4" stroke="#db2777" stroke-width="2.5"/>
-              <path d="M78 52 Q92 44 88 60 Q82 64 77 60 Z" fill="#f9a8d4" stroke="#db2777" stroke-width="2.5"/>
+            <svg viewBox="0 0 110 110" class="w-full h-full drop-shadow-sm">
+              <!-- Curly tail on right -->
+              <path d="M84 66 C96 62, 97 74, 88 76 C84 77, 85 82, 91 81" fill="none" stroke="#c02678" stroke-width="3.2" stroke-linecap="round"/>
+              <!-- Sky blue shirt/outfit -->
+              <path d="M36 68 L74 68 L78 88 L32 88 Z" fill="#38bdf8" stroke="#0369a1" stroke-width="3" stroke-linejoin="round"/>
+              <!-- Little Mr. Dinosaur held by George -->
+              <path d="M74 72 Q83 68 85 75 Q88 77 85 81 L75 81 Z" fill="#22c55e" stroke="#14532d" stroke-width="2.2"/>
+              <circle cx="81" cy="73" r="1.4" fill="#ffffff"/>
+              <!-- Pink legs & dark shoes -->
+              <rect x="41" y="88" width="7" height="10" rx="3.5" fill="#f9a8d4" stroke="#c02678" stroke-width="2.5"/>
+              <rect x="62" y="88" width="7" height="10" rx="3.5" fill="#f9a8d4" stroke="#c02678" stroke-width="2.5"/>
+              <ellipse cx="44" cy="99" rx="7.5" ry="4" fill="#1e293b"/>
+              <ellipse cx="66" cy="99" rx="7.5" ry="4" fill="#1e293b"/>
+              <!-- Piggy body & head -->
+              <ellipse cx="56" cy="54" rx="27" ry="22" fill="#fbcfe8" stroke="#c02678" stroke-width="3.2"/>
+              <!-- Two pointed ears on top of head -->
+              <path d="M46 34 L42 15 L55 31 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M58 34 L58 14 L69 32 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3" stroke-linejoin="round"/>
+              <!-- Signature elongated round snout pointing left -->
+              <path d="M32 45 C17 44, 15 62, 31 61 L38 59 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3.2" stroke-linejoin="round"/>
+              <ellipse cx="22" cy="52.5" rx="5.5" ry="7.5" fill="#f472b6" stroke="#c02678" stroke-width="2"/>
+              <circle cx="20.5" cy="51.5" r="1.7" fill="#831843"/>
+              <circle cx="24" cy="53.5" r="1.7" fill="#831843"/>
+              <!-- Two eyes on side of head -->
+              <circle cx="43" cy="43" r="5.2" fill="#ffffff" stroke="#1e293b" stroke-width="2.2"/>
+              <circle cx="42" cy="43" r="2.2" fill="#0f172a"/>
+              <circle cx="55" cy="43" r="5.2" fill="#ffffff" stroke="#1e293b" stroke-width="2.2"/>
+              <circle cx="54" cy="43" r="2.2" fill="#0f172a"/>
+              <!-- Rosy cheek -->
+              <ellipse cx="46" cy="55" rx="6.5" ry="4.5" fill="#f472b6" opacity="0.7"/>
+              <!-- Happy smile -->
+              <path d="M34 63 Q43 68 51 62" fill="none" stroke="#9d174d" stroke-width="2.8" stroke-linecap="round"/>
             </svg>
           `;
         case 'bluey':
@@ -879,53 +904,65 @@
         case 'chase':
           return `
             <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
-              <polygon points="24,38 34,14 46,34" fill="#92400e" stroke="#451a03" stroke-width="2.5"/>
-              <polygon points="76,38 66,14 54,34" fill="#92400e" stroke="#451a03" stroke-width="2.5"/>
+              <ellipse cx="24" cy="52" rx="10" ry="17" transform="rotate(16 24 52)" fill="#92400e" stroke="#451a03" stroke-width="3"/>
+              <ellipse cx="76" cy="52" rx="10" ry="17" transform="rotate(-16 76 52)" fill="#92400e" stroke="#451a03" stroke-width="3"/>
               <circle cx="50" cy="54" r="25" fill="#d97706" stroke="#78350f" stroke-width="3"/>
-              <path d="M27 36 Q50 16 73 36 L68 41 L32 41 Z" fill="#2563eb" stroke="#1e3a8a" stroke-width="2.5"/>
+              <path d="M27 36 L50 18 L73 36 Z" fill="#1d4ed8" stroke="#1e3a8a" stroke-width="2.5"/>
               <circle cx="50" cy="28" r="5" fill="#facc15"/>
-              <circle cx="41" cy="50" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="41" cy="50" r="2" fill="#1e293b"/>
-              <circle cx="59" cy="50" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="59" cy="50" r="2" fill="#1e293b"/>
-              <circle cx="50" cy="59" r="4.5" fill="#1e293b"/>
-              <path d="M42 67 Q50 72 58 67" fill="none" stroke="#451a03" stroke-width="2.5" stroke-linecap="round"/>
+              <circle cx="41" cy="49" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
+              <circle cx="42" cy="49" r="2" fill="#1e293b"/>
+              <circle cx="59" cy="49" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
+              <circle cx="58" cy="49" r="2" fill="#1e293b"/>
+              <circle cx="50" cy="58" r="4.5" fill="#1e293b"/>
+              <path d="M42 66 Q50 72 58 66" fill="none" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round"/>
             </svg>
           `;
-        case 'peppa':
         default:
           return `
-            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-sm">
-              <ellipse cx="42" cy="22" rx="6" ry="12" transform="rotate(-12 42 22)" fill="#f472b6" stroke="#db2777" stroke-width="2.5"/>
-              <ellipse cx="58" cy="22" rx="6" ry="12" transform="rotate(12 58 22)" fill="#f472b6" stroke="#db2777" stroke-width="2.5"/>
-              <ellipse cx="54" cy="52" rx="27" ry="22" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
-              <ellipse cx="26" cy="46" rx="14" ry="10.5" fill="#f472b6" stroke="#db2777" stroke-width="3"/>
-              <circle cx="20" cy="46" r="2.3" fill="#be185d"/>
-              <circle cx="26" cy="46" r="2.3" fill="#be185d"/>
-              <circle cx="38" cy="40" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="39" cy="40" r="2" fill="#1e293b"/>
-              <circle cx="50" cy="40" r="4.5" fill="#ffffff" stroke="#1e293b" stroke-width="2"/>
-              <circle cx="51" cy="40" r="2" fill="#1e293b"/>
-              <circle cx="54" cy="52" r="5.5" fill="#fb7185" opacity="0.65"/>
-              <path d="M24 56 Q33 62 43 56" fill="none" stroke="#9d174d" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M36 74 L72 74 L78 90 L30 90 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="2.5"/>
-              <rect x="43" y="90" width="7" height="8" rx="3" fill="#f472b6" stroke="#db2777" stroke-width="2"/>
-              <rect x="58" y="90" width="7" height="8" rx="3" fill="#f472b6" stroke="#db2777" stroke-width="2"/>
+            <svg viewBox="0 0 110 110" class="w-full h-full drop-shadow-sm">
+              <!-- Curly tail on right -->
+              <path d="M85 65 C98 60, 99 74, 89 76 C85 77, 86 82, 93 81" fill="none" stroke="#c02678" stroke-width="3.2" stroke-linecap="round"/>
+              <!-- Peppa's bright red dress -->
+              <path d="M35 67 L75 67 L81 88 L29 88 Z" fill="#ef4444" stroke="#991b1b" stroke-width="3" stroke-linejoin="round"/>
+              <!-- Pink legs & dark Mary-Jane shoes -->
+              <rect x="41" y="88" width="7" height="10" rx="3.5" fill="#fbcfe8" stroke="#c02678" stroke-width="2.5"/>
+              <rect x="62" y="88" width="7" height="10" rx="3.5" fill="#fbcfe8" stroke="#c02678" stroke-width="2.5"/>
+              <ellipse cx="44" cy="99" rx="7.5" ry="4" fill="#1e293b"/>
+              <ellipse cx="66" cy="99" rx="7.5" ry="4" fill="#1e293b"/>
+              <!-- Piggy body & head -->
+              <ellipse cx="56" cy="53" rx="28" ry="23" fill="#fbcfe8" stroke="#c02678" stroke-width="3.2"/>
+              <!-- Two pointed ears on top of head -->
+              <path d="M45 32 L40 12 L55 29 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M58 32 L59 11 L70 30 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3" stroke-linejoin="round"/>
+              <!-- Signature elongated round snout pointing left -->
+              <path d="M31 44 C15 43, 13 62, 30 61 L38 59 Z" fill="#fbcfe8" stroke="#c02678" stroke-width="3.2" stroke-linejoin="round"/>
+              <ellipse cx="21" cy="52" rx="5.8" ry="7.8" fill="#f472b6" stroke="#c02678" stroke-width="2"/>
+              <circle cx="19.5" cy="51" r="1.7" fill="#831843"/>
+              <circle cx="23" cy="53" r="1.7" fill="#831843"/>
+              <!-- Two eyes on side of head -->
+              <circle cx="43" cy="42" r="5.4" fill="#ffffff" stroke="#1e293b" stroke-width="2.2"/>
+              <circle cx="42" cy="42" r="2.3" fill="#0f172a"/>
+              <circle cx="56" cy="42" r="5.4" fill="#ffffff" stroke="#1e293b" stroke-width="2.2"/>
+              <circle cx="55" cy="42" r="2.3" fill="#0f172a"/>
+              <!-- Rosy cheek -->
+              <ellipse cx="47" cy="55" rx="7" ry="4.8" fill="#f472b6" opacity="0.72"/>
+              <!-- Happy smile -->
+              <path d="M34 63 Q43 69 52 62" fill="none" stroke="#9d174d" stroke-width="2.8" stroke-linecap="round"/>
             </svg>
           `;
       }
     }
 
-    // --- 4. DOM REFERENCES ---
+    // --- 4. DOM REFERENCES & SHARED UI HELPERS ---
     const el = {
       headerAvatar: document.getElementById('header-avatar'),
-      characterRoster: document.getElementById('character-roster'),
+      roster: document.getElementById('character-roster'),
       modeTabs: document.querySelectorAll('.mode-tab'),
       cueBadge: document.getElementById('cue-badge'),
       friendlyPrompt: document.getElementById('friendly-prompt'),
       modeSubcontrols: document.getElementById('mode-subcontrols'),
-      arena: document.getElementById('play-arena'),
       arenaLayer: document.getElementById('arena-layer'),
+      lastActionText: document.getElementById('last-action-text'),
       playerScorePill: document.getElementById('player-score-pill'),
       buddyScorePill: document.getElementById('buddy-score-pill'),
       goalTargetNum: document.getElementById('goal-target-num'),
@@ -939,7 +976,6 @@
       celebrationHeading: document.getElementById('celebration-heading'),
       celebrationSub: document.getElementById('celebration-sub'),
       btnCelebrationAgain: document.getElementById('btn-celebration-again'),
-      lastActionText: document.getElementById('last-action-text'),
       btnSound: document.getElementById('btn-sound'),
       soundIcon: document.getElementById('sound-icon'),
       soundLabel: document.getElementById('sound-label'),
@@ -950,214 +986,461 @@
       cheerToastText: document.getElementById('cheer-toast-text')
     };
 
+    state.playerStars = 0;
+    state.buddyStars = 0;
+    state.goalStars = 12;
+    state.raceMode = 'buddy'; // 'buddy' | 'goal'
+    state.celebrated = false;
+
+    let toastTimeout = null;
+
     function getActiveCharacter() {
       return CHARACTERS.find((c) => c.id === state.characterId) || CHARACTERS[0];
     }
 
-    function getFriendlyBuddy() {
-      // Pick George as default buddy unless George is selected, then Peppa
-      if (state.characterId === 'george') {
-        return CHARACTERS.find((c) => c.id === 'peppa') || CHARACTERS[0];
+    function setLastAction(label) {
+      if (el.lastActionText) {
+        el.lastActionText.textContent = label;
       }
-      return CHARACTERS.find((c) => c.id === 'george') || CHARACTERS[1];
     }
 
-    // --- 5. UI HELPERS: TOAST, CONFETTI, SPARKLES, RACE BAR ---
-    let toastTimer = null;
     function showCheerToast(message) {
+      if (!el.cheerToast || !el.cheerToastText) return;
       el.cheerToastText.textContent = message;
       el.cheerToast.classList.remove('hidden');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => {
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
         el.cheerToast.classList.add('hidden');
       }, 1700);
     }
 
-    function setLastAction(text) {
-      el.lastActionText.textContent = text;
-    }
-
-    function spawnConfettiBurst(count = 26) {
-      const colors = ['#ec4899', '#facc15', '#38bdf8', '#4ade80', '#a78bfa', '#fb923c'];
+    function spawnConfettiBurst(count = 18) {
+      const colors = ['#ec4899', '#facc15', '#38bdf8', '#4ade80', '#a855f7'];
       for (let i = 0; i < count; i++) {
         const piece = document.createElement('div');
         piece.className = 'confetti-piece';
         piece.style.left = `${Math.random() * 100}vw`;
-        piece.style.width = `${8 + Math.random() * 10}px`;
-        piece.style.height = `${8 + Math.random() * 10}px`;
+        piece.style.width = `${8 + Math.random() * 8}px`;
+        piece.style.height = `${12 + Math.random() * 10}px`;
         piece.style.backgroundColor = colors[i % colors.length];
-        piece.style.animationDuration = `${1.8 + Math.random() * 1.4}s`;
         piece.style.animationDelay = `${Math.random() * 0.35}s`;
         document.body.appendChild(piece);
-        setTimeout(() => piece.remove(), 3400);
+        setTimeout(() => piece.remove(), 2900);
       }
     }
 
-    function awardStar(points = 1, label = 'Star earned!', isBonus = false) {
+    function renderRoster() {
+      const active = getActiveCharacter();
+      if (el.headerAvatar) {
+        el.headerAvatar.innerHTML = renderCharacterSVG(active.id);
+      }
+      if (!el.roster) return;
+
+      el.roster.innerHTML = CHARACTERS.map((char) => {
+        const isSelected = char.id === active.id;
+        return `
+          <button
+            type="button"
+            data-char-id="${char.id}"
+            class="char-card toy-btn ${isSelected ? `${char.bgSoft} ring-2 ring-pink-400 border-2 ${char.borderSoft}` : 'bg-white border border-slate-200 hover:bg-slate-50'} rounded-xl px-2 py-1 flex items-center gap-1.5 text-left cursor-pointer"
+          >
+            <div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0">
+              ${renderCharacterSVG(char.id)}
+            </div>
+            <div class="min-w-0">
+              <div class="font-display font-bold text-xs text-slate-800 truncate">${char.shortName}</div>
+              <div class="hidden sm:block text-[10px] font-semibold text-slate-500 truncate">${char.badge}</div>
+            </div>
+          </button>
+        `;
+      }).join('');
+
+      el.roster.querySelectorAll('.char-card').forEach((card) => {
+        card.addEventListener('click', () => {
+          state.characterId = card.dataset.charId;
+          const chosen = getActiveCharacter();
+          soundEngine.playGentleBoing();
+          renderRoster();
+          updateRaceTrack();
+          showCheerToast(chosen.cheer);
+          switchMode(state.mode, false);
+        });
+      });
+    }
+
+    function updateRaceTrack() {
+      const char = getActiveCharacter();
+      const buddyChar = CHARACTERS.find((c) => c.id !== char.id) || CHARACTERS[1];
+
+      if (el.playerScorePill) {
+        el.playerScorePill.textContent = `⭐ You: ${state.playerStars}`;
+      }
+      if (el.goalTargetNum) {
+        el.goalTargetNum.textContent = String(state.goalStars);
+      }
+
+      const playerPct = Math.min(90, 2 + (state.playerStars / state.goalStars) * 88);
+      if (el.playerRunner) {
+        el.playerRunner.style.left = `${playerPct}%`;
+      }
+      if (el.playerRunnerIcon) {
+        el.playerRunnerIcon.innerHTML = renderCharacterSVG(char.id);
+      }
+
+      if (el.raceMode === 'buddy') {
+        if (el.buddyScorePill) {
+          el.buddyScorePill.classList.remove('hidden');
+          el.buddyScorePill.textContent = `🐷 ${buddyChar.shortName}: ${state.buddyStars}`;
+        }
+        if (el.buddyRunner) {
+          el.buddyRunner.classList.remove('hidden');
+          const buddyPct = Math.min(86, 2 + (state.buddyStars / state.goalStars) * 84);
+          el.buddyRunner.style.left = `${buddyPct}%`;
+        }
+        if (el.buddyRunnerIcon) {
+          el.buddyRunnerIcon.innerHTML = renderCharacterSVG(buddyChar.id);
+        }
+        if (el.buddyRunnerLabel) {
+          el.buddyRunnerLabel.textContent = buddyChar.shortName;
+        }
+        if (el.raceTitle) {
+          el.raceTitle.textContent = `Friendly Race with ${buddyChar.shortName} to Muddy Castle!`;
+        }
+      } else {
+        if (el.buddyScorePill) el.buddyScorePill.classList.add('hidden');
+        if (el.buddyRunner) el.buddyRunner.classList.add('hidden');
+        if (el.raceTitle) {
+          el.raceTitle.textContent = `Collect ${state.goalStars} Stars to Reach Muddy Castle!`;
+        }
+      }
+    }
+
+    function awardStar(amount = 1, actionLabel = 'Star!') {
       if (state.celebrated) return;
       const char = getActiveCharacter();
-      state.playerStars += points;
-      if (isBonus) {
-        soundEngine.playSplash(true, char.id);
-      } else {
-        soundEngine.playStarChime(char.id);
-      }
+      state.playerStars += amount;
+      setLastAction(`${actionLabel} (+${amount} ⭐)`);
+      soundEngine.playStarChime(char.id);
       soundEngine.playRacerStep(true);
       updateRaceTrack();
 
       if (state.playerStars >= state.goalStars) {
         state.celebrated = true;
+        clearModeTimers();
         soundEngine.playFanfare(char.id);
-        spawnConfettiBurst(38);
-        el.celebrationHeading.textContent = `Hooray! ${char.shortName} Reached Muddy Castle!`;
-        el.celebrationSub.textContent = `You collected ${state.playerStars} stars! You're a super mouse & keyboard explorer!`;
-        el.celebrationBanner.classList.remove('hidden');
-      } else if (state.playerStars % 4 === 0) {
-        spawnConfettiBurst(14);
-        showCheerToast(`⭐ ${state.playerStars} stars! Keep going!`);
+        spawnConfettiBurst(28);
+        if (el.celebrationHeading) {
+          el.celebrationHeading.textContent = `Hooray! ${char.shortName} Reached Muddy Castle!`;
+        }
+        if (el.celebrationSub) {
+          el.celebrationSub.textContent = `You collected ${state.playerStars} stars! Ready for another super race?`;
+        }
+        if (el.celebrationBanner) {
+          el.celebrationBanner.classList.remove('hidden');
+        }
       }
-      setLastAction(label);
-    }
-
-    function updateRaceTrack() {
-      const char = getActiveCharacter();
-      const buddy = getFriendlyBuddy();
-
-      el.playerScorePill.textContent = `⭐ You: ${state.playerStars}`;
-      el.goalTargetNum.textContent = state.goalStars;
-
-      if (state.raceMode === 'buddy') {
-        el.buddyScorePill.classList.remove('hidden');
-        el.buddyRunner.classList.remove('hidden');
-        el.raceTitle.textContent = `Friendly Race to Muddy Castle (${char.shortName} vs. ${buddy.shortName})`;
-        el.buddyScorePill.textContent = `${buddy.shortName}: ${state.buddyStars}`;
-        el.buddyRunnerLabel.textContent = buddy.shortName;
-        el.buddyRunnerIcon.innerHTML = renderCharacterSVG(buddy.id);
-      } else {
-        el.buddyScorePill.classList.add('hidden');
-        el.buddyRunner.classList.add('hidden');
-        el.raceTitle.textContent = `Star Goal: Help ${char.shortName} Reach the Castle!`;
-      }
-
-      el.playerRunnerIcon.innerHTML = renderCharacterSVG(char.id);
-
-      // Map stars (0 .. goalStars) to horizontal percentage (2% .. 86%)
-      const playerPct = Math.min(86, 2 + (state.playerStars / state.goalStars) * 84);
-      const buddyPct = Math.min(84, 2 + (state.buddyStars / state.goalStars) * 84);
-      el.playerRunner.style.left = `${playerPct}%`;
-      el.buddyRunner.style.left = `${buddyPct}%`;
     }
 
     function resetRace() {
       state.playerStars = 0;
       state.buddyStars = 0;
       state.celebrated = false;
-      el.celebrationBanner.classList.add('hidden');
+      if (el.celebrationBanner) {
+        el.celebrationBanner.classList.add('hidden');
+      }
+      soundEngine.playGentleBoing();
       updateRaceTrack();
-      showCheerToast('🏁 New star race started! Let\'s go!');
-      setLastAction('New Race Started');
+      switchMode(state.mode, false);
+      showCheerToast('🏁 Fresh race started! Let\'s go!');
     }
 
-    // --- 6. CHARACTER ROSTER RENDERING ---
-    function renderRoster() {
-      const activeChar = getActiveCharacter();
-      el.headerAvatar.innerHTML = renderCharacterSVG(activeChar.id);
+    // --- 7. MODE 1: MUDDY PUDDLE POP (MULTI-LEVEL MOUSE MOVE & CLICK GAMES) ---
+    const MOUSE_LEVEL_CONFIGS = [
+      {
+        level: 1,
+        key: 'big',
+        name: 'Big Easy Puddles',
+        badge: 'Level 1 • Big Puddles',
+        prompt: (charName) => `Level 1: Click the big muddy puddles to splash with ${charName}!`,
+        targetHits: 4
+      },
+      {
+        level: 2,
+        key: 'bouncy',
+        name: 'Bouncy Balloons',
+        badge: 'Level 2 • Balloons',
+        prompt: (charName) => `Level 2: Pop the floating bouncy balloons with ${charName}!`,
+        targetHits: 4
+      },
+      {
+        level: 3,
+        key: 'butterflies',
+        name: 'Flutter Butterflies',
+        badge: 'Level 3 • Butterflies',
+        prompt: (charName) => `Level 3: Chase & click the gliding butterflies with ${charName}!`,
+        targetHits: 4
+      },
+      {
+        level: 4,
+        key: 'bushes',
+        name: 'Peek-a-Boo Friends',
+        badge: 'Level 4 • Peek-a-Boo',
+        prompt: (charName) => `Level 4: Click the peeking friends popping out of bushes with ${charName}!`,
+        targetHits: 4
+      },
+      {
+        level: 5,
+        key: 'stars',
+        name: 'Shooting Star Catch',
+        badge: 'Level 5 • Star Catch',
+        prompt: (charName) => `Level 5: Click the golden shooting stars across the sky with ${charName}!`,
+        targetHits: 5
+      }
+    ];
 
-      el.characterRoster.innerHTML = CHARACTERS.map((c) => {
-        const isSelected = c.id === state.characterId;
-        return `
-          <button
-            type="button"
-            data-char="${c.id}"
-            class="char-card toy-btn ${isSelected ? 'bg-pink-100 ring-4 ring-pink-400 border-pink-400' : 'bg-white hover:bg-slate-50 border-slate-200'} border-2 rounded-2xl p-2 flex items-center gap-2 text-left cursor-pointer"
-          >
-            <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl ${c.bgSoft} border ${c.borderSoft} p-0.5 shrink-0">
-              ${renderCharacterSVG(c.id)}
-            </div>
-            <div class="min-w-0">
-              <div class="font-display font-bold text-xs sm:text-sm text-slate-800 truncate">${c.shortName}</div>
-              <div class="text-[11px] font-bold text-slate-500 truncate">${c.badge}</div>
-            </div>
-          </button>
-        `;
-      }).join('');
-
-      el.characterRoster.querySelectorAll('.char-card').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          state.characterId = btn.dataset.char;
-          const chosen = getActiveCharacter();
-          soundEngine.playGentleBoing();
-          renderRoster();
-          updateRaceTrack();
-          // Refresh active mode visuals so character updates immediately
-          switchMode(state.mode, false);
-          showCheerToast(`${chosen.shortName}: "${chosen.cheer}"`);
-          setLastAction(`Picked ${chosen.name}`);
-        });
-      });
+    function getCurrentMouseLevelConfig() {
+      if (state.puddleStyle !== 'auto') {
+        const foundByKey = MOUSE_LEVEL_CONFIGS.find((cfg) => cfg.key === state.puddleStyle);
+        if (foundByKey) return foundByKey;
+      }
+      const idx = ((state.mouseLevel - 1) % MOUSE_LEVEL_CONFIGS.length + MOUSE_LEVEL_CONFIGS.length) % MOUSE_LEVEL_CONFIGS.length;
+      return MOUSE_LEVEL_CONFIGS[idx];
     }
 
-    // --- 7. MODE 1: MUDDY PUDDLE POP (MOUSE MOVE & CLICK) ---
+    function stopMouseMovers() {
+      if (state.mouseMoverRaf) {
+        cancelAnimationFrame(state.mouseMoverRaf);
+        state.mouseMoverRaf = null;
+      }
+      state.mouseMovers = [];
+    }
+
+    function advanceMouseLevelIfReady() {
+      state.mouseLevelHits += 1;
+      if (state.mouseLevelHits >= state.mouseLevelTarget) {
+        state.mouseLevelHits = 0;
+        if (state.puddleStyle === 'auto') {
+          state.mouseLevel += 1;
+        } else {
+          const curIdx = MOUSE_LEVEL_CONFIGS.findIndex((c) => c.key === state.puddleStyle);
+          const nextCfg = MOUSE_LEVEL_CONFIGS[(curIdx + 1) % MOUSE_LEVEL_CONFIGS.length];
+          state.puddleStyle = nextCfg.key;
+          state.mouseLevel = nextCfg.level;
+        }
+        const nextCfg = getCurrentMouseLevelConfig();
+        state.mouseLevelTarget = nextCfg.targetHits;
+        spawnConfettiBurst(12);
+        showCheerToast(`🎉 Level Up! Next: ${nextCfg.name}!`);
+        setupPuddlesMode();
+      } else {
+        updateMouseLevelProgressBadge();
+      }
+    }
+
+    function updateMouseLevelProgressBadge() {
+      const progEl = document.getElementById('mouse-level-progress');
+      if (progEl) {
+        progEl.textContent = `${state.mouseLevelHits}/${state.mouseLevelTarget}`;
+      }
+    }
+
     function setupPuddlesMode() {
+      stopMouseMovers();
+      clearInterval(state.spawnInterval);
+      state.spawnInterval = null;
+
       const char = getActiveCharacter();
-      el.cueBadge.textContent = '🖱️ Mouse Move & Click';
-      el.friendlyPrompt.textContent = `Move your mouse and click the muddy puddles & balloons with ${char.shortName}!`;
+      const lvlCfg = getCurrentMouseLevelConfig();
+      state.mouseLevelTarget = lvlCfg.targetHits;
+
+      el.cueBadge.textContent = `🖱️ ${lvlCfg.badge}`;
+      el.friendlyPrompt.textContent = lvlCfg.prompt(char.shortName);
 
       el.modeSubcontrols.innerHTML = `
-        <button id="sub-puddle-big" type="button" class="toy-btn ${state.puddleStyle === 'big' ? 'bg-pink-500 text-white' : 'bg-white text-slate-700 border border-slate-200'} font-display font-bold text-xs px-3 py-1.5 rounded-xl cursor-pointer">
-          ⭕ Big Easy Puddles
+        <span class="bg-amber-100 text-amber-900 font-display font-bold text-xs px-2.5 py-1 rounded-xl border border-amber-300">
+          Lvl ${lvlCfg.level}: <span id="mouse-level-progress">${state.mouseLevelHits}/${state.mouseLevelTarget}</span>
+        </span>
+        <button id="sub-puddle-auto" type="button" class="toy-btn ${state.puddleStyle === 'auto' ? 'bg-pink-500 text-white' : 'bg-white text-slate-700 border border-slate-200'} font-display font-bold text-xs px-2.5 py-1 rounded-xl cursor-pointer">
+          ⭐ Auto Levels
         </button>
-        <button id="sub-puddle-bouncy" type="button" class="toy-btn ${state.puddleStyle === 'bouncy' ? 'bg-purple-500 text-white' : 'bg-white text-slate-700 border border-slate-200'} font-display font-bold text-xs px-3 py-1.5 rounded-xl cursor-pointer">
-          🎈 Bouncy Balloons
+        <button id="sub-puddle-next" type="button" class="toy-btn bg-sky-500 text-white font-display font-bold text-xs px-2.5 py-1 rounded-xl cursor-pointer">
+          Next Game ⏭
         </button>
       `;
 
-      document.getElementById('sub-puddle-big').addEventListener('click', () => {
-        state.puddleStyle = 'big';
+      document.getElementById('sub-puddle-auto').addEventListener('click', () => {
+        state.puddleStyle = 'auto';
+        state.mouseLevelHits = 0;
         setupPuddlesMode();
-        spawnPuddleBatch(4);
       });
-      document.getElementById('sub-puddle-bouncy').addEventListener('click', () => {
-        state.puddleStyle = 'bouncy';
+
+      document.getElementById('sub-puddle-next').addEventListener('click', () => {
+        const curIdx = MOUSE_LEVEL_CONFIGS.findIndex((c) => c.key === lvlCfg.key);
+        const nextCfg = MOUSE_LEVEL_CONFIGS[(curIdx + 1) % MOUSE_LEVEL_CONFIGS.length];
+        state.puddleStyle = nextCfg.key;
+        state.mouseLevel = nextCfg.level;
+        state.mouseLevelHits = 0;
+        soundEngine.playGentleBoing();
         setupPuddlesMode();
-        spawnPuddleBatch(4);
       });
 
       el.arenaLayer.innerHTML = '';
 
-      // Character mascot cheering on left-bottom
+      // Character mascot cheering on bottom-left
       const mascot = document.createElement('div');
       mascot.id = 'puddle-mascot';
-      mascot.className = 'hidden sm:block absolute bottom-3 left-3 w-20 h-20 pointer-events-none z-20';
+      mascot.className = 'hidden sm:block absolute bottom-3 left-3 w-16 h-16 pointer-events-none z-20';
       mascot.innerHTML = renderCharacterSVG(char.id);
       el.arenaLayer.appendChild(mascot);
 
-      spawnPuddleBatch(state.puddleStyle === 'big' ? 4 : 5);
+      const initialBatch = lvlCfg.key === 'butterflies' ? 3 : 4;
+      spawnPuddleBatch(initialBatch, lvlCfg.key);
 
-      const spawnRate = state.pace === 'gentle' ? 2200 : 1450;
+      const spawnRate = state.pace === 'gentle' ? 2100 : 1400;
       state.spawnInterval = setInterval(() => {
+        const maxCount = lvlCfg.key === 'butterflies' ? 4 : 6;
         const currentTargets = el.arenaLayer.querySelectorAll('.puddle-target').length;
-        if (currentTargets < 6) {
-          spawnSinglePuddleTarget();
+        if (currentTargets < maxCount) {
+          spawnSinglePuddleTarget(lvlCfg.key);
         }
       }, spawnRate);
-    }
 
-    function spawnPuddleBatch(count) {
-      for (let i = 0; i < count; i++) {
-        setTimeout(() => spawnSinglePuddleTarget(), i * 120);
+      if (lvlCfg.key === 'butterflies' || lvlCfg.key === 'stars') {
+        startMouseMoversLoop();
       }
     }
 
-    function spawnSinglePuddleTarget() {
+    function startMouseMoversLoop() {
+      const step = () => {
+        if (state.mode !== 'puddles') return;
+        const arenaRect = el.arenaLayer.getBoundingClientRect();
+        if (arenaRect.width > 60 && arenaRect.height > 60) {
+          const speedScale = state.pace === 'gentle' ? 0.65 : 1.15;
+          state.mouseMovers.forEach((m) => {
+            if (!m.el || !m.el.isConnected) return;
+            const w = m.el.offsetWidth || 80;
+            const h = m.el.offsetHeight || 80;
+            m.x += m.vx * speedScale;
+            m.y += m.vy * speedScale;
+
+            if (m.x < 12) {
+              m.x = 12;
+              m.vx = Math.abs(m.vx);
+            } else if (m.x > arenaRect.width - w - 12) {
+              m.x = arenaRect.width - w - 12;
+              m.vx = -Math.abs(m.vx);
+            }
+
+            if (m.y < 12) {
+              m.y = 12;
+              m.vy = Math.abs(m.vy);
+            } else if (m.y > arenaRect.height - h - 12) {
+              m.y = arenaRect.height - h - 12;
+              m.vy = -Math.abs(m.vy);
+            }
+
+            m.el.style.left = `${m.x}px`;
+            m.el.style.top = `${m.y}px`;
+          });
+        }
+        state.mouseMoverRaf = requestAnimationFrame(step);
+      };
+      state.mouseMoverRaf = requestAnimationFrame(step);
+    }
+
+    function spawnPuddleBatch(count, gameKey) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => spawnSinglePuddleTarget(gameKey), i * 110);
+      }
+    }
+
+    function buildMouseTargetArt(gameKey) {
+      const palette = ['#f43f5e', '#38bdf8', '#facc15', '#a855f7', '#34d399'];
+      const color = palette[Math.floor(Math.random() * palette.length)];
+
+      if (gameKey === 'bouncy') {
+        return `
+          <div class="w-full h-full animate-float flex flex-col items-center justify-center">
+            <svg viewBox="0 0 100 115" class="w-full h-full drop-shadow-md">
+              <ellipse cx="50" cy="46" rx="34" ry="40" fill="${color}" stroke="#ffffff" stroke-width="4"/>
+              <ellipse cx="38" cy="30" rx="8" ry="13" transform="rotate(-22 38 30)" fill="#ffffff" opacity="0.45"/>
+              <polygon points="45,85 55,85 50,92" fill="${color}"/>
+              <path d="M50 92 Q45 102 52 112" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      if (gameKey === 'butterflies') {
+        return `
+          <div class="w-full h-full flex items-center justify-center transition-transform group-hover:scale-110">
+            <svg viewBox="0 0 110 95" class="w-full h-full drop-shadow-md">
+              <ellipse cx="34" cy="42" rx="22" ry="18" transform="rotate(-18 34 42)" fill="${color}" stroke="#ffffff" stroke-width="3"/>
+              <ellipse cx="76" cy="42" rx="22" ry="18" transform="rotate(18 76 42)" fill="${color}" stroke="#ffffff" stroke-width="3"/>
+              <ellipse cx="38" cy="65" rx="15" ry="12" transform="rotate(14 38 65)" fill="#fde047" stroke="#ffffff" stroke-width="2.5"/>
+              <ellipse cx="72" cy="65" rx="15" ry="12" transform="rotate(-14 72 65)" fill="#fde047" stroke="#ffffff" stroke-width="2.5"/>
+              <rect x="51" y="26" width="8" height="46" rx="4" fill="#334155"/>
+              <path d="M52 27 Q44 14 38 16 M58 27 Q66 14 72 16" fill="none" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      if (gameKey === 'bushes') {
+        const friendEmojis = ['🐷', '🐸', '🦊', '🐻', '🐰'];
+        const peekEmoji = friendEmojis[Math.floor(Math.random() * friendEmojis.length)];
+        return `
+          <div class="w-full h-full flex flex-col items-center justify-end transition-transform group-hover:scale-105 relative">
+            <span class="text-3xl sm:text-4xl -mb-3 z-10 animate-bounce">${peekEmoji}</span>
+            <svg viewBox="0 0 110 70" class="w-full h-14 drop-shadow-md z-20">
+              <circle cx="28" cy="44" r="20" fill="#16a34a" stroke="#14532d" stroke-width="3"/>
+              <circle cx="55" cy="36" r="24" fill="#22c55e" stroke="#14532d" stroke-width="3"/>
+              <circle cx="82" cy="44" r="20" fill="#16a34a" stroke="#14532d" stroke-width="3"/>
+              <rect x="16" y="45" width="78" height="20" rx="10" fill="#15803d"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      if (gameKey === 'stars') {
+        return `
+          <div class="w-full h-full animate-pulse-soft flex items-center justify-center transition-transform group-hover:scale-110">
+            <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
+              <polygon points="50,8 62,35 92,38 69,58 76,88 50,72 24,88 31,58 8,38 38,35" fill="#facc15" stroke="#ffffff" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="42" cy="46" r="3.5" fill="#78350f"/>
+              <circle cx="58" cy="46" r="3.5" fill="#78350f"/>
+              <path d="M44 55 Q50 61 56 55" fill="none" stroke="#78350f" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+        `;
+      }
+
+      // Default Level 1: Big Easy Puddles
+      return `
+        <div class="w-full h-full flex items-center justify-center transition-transform group-hover:scale-105">
+          <svg viewBox="0 0 120 85" class="w-full h-full drop-shadow-md">
+            <path d="M22 44 C12 34 24 16 44 19 C56 10 82 12 94 23 C109 28 112 46 98 56 C103 68 85 77 64 74 C44 78 20 71 17 58 C14 52 17 47 22 44 Z" fill="#78350f" stroke="#451a03" stroke-width="3.5"/>
+            <ellipse cx="55" cy="36" rx="22" ry="8" transform="rotate(-8 55 36)" fill="#a16207" opacity="0.55"/>
+            <circle cx="38" cy="29" r="3.5" fill="#fef08a" opacity="0.7"/>
+            <text x="60" y="53" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="18" fill="#fef3c7">SPLASH!</text>
+          </svg>
+        </div>
+      `;
+    }
+
+    function spawnSinglePuddleTarget(gameKey = getCurrentMouseLevelConfig().key) {
       if (state.mode !== 'puddles') return;
       const arenaRect = el.arenaLayer.getBoundingClientRect();
       if (arenaRect.width < 80 || arenaRect.height < 80) return;
 
-      const isBouncy = state.puddleStyle === 'bouncy';
-      const size = isBouncy
-        ? (state.pace === 'gentle' ? 88 : 74)
-        : (state.pace === 'gentle' ? 108 : 88);
+      const sizeMap = {
+        big: state.pace === 'gentle' ? 108 : 90,
+        bouncy: state.pace === 'gentle' ? 88 : 74,
+        butterflies: state.pace === 'gentle' ? 86 : 72,
+        bushes: state.pace === 'gentle' ? 96 : 82,
+        stars: state.pace === 'gentle' ? 86 : 72
+      };
+      const size = sizeMap[gameKey] || 92;
 
       const maxX = Math.max(20, arenaRect.width - size - 24);
       const maxY = Math.max(20, arenaRect.height - size - 24);
@@ -1171,33 +1454,21 @@
       target.style.top = `${y}px`;
       target.style.width = `${size}px`;
       target.style.height = `${size}px`;
-      target.setAttribute('aria-label', isBouncy ? 'Pop colorful balloon' : 'Splash muddy puddle');
+      target.setAttribute('aria-label', `Click ${gameKey} target`);
+      target.innerHTML = buildMouseTargetArt(gameKey);
 
-      const balloonColors = ['#f43f5e', '#38bdf8', '#facc15', '#a855f7', '#34d399'];
-      const bColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
-
-      if (isBouncy) {
-        target.innerHTML = `
-          <div class="w-full h-full animate-float flex flex-col items-center justify-center">
-            <svg viewBox="0 0 100 115" class="w-full h-full drop-shadow-md">
-              <ellipse cx="50" cy="46" rx="34" ry="40" fill="${bColor}" stroke="#ffffff" stroke-width="4"/>
-              <ellipse cx="38" cy="30" rx="8" ry="13" transform="rotate(-22 38 30)" fill="#ffffff" opacity="0.45"/>
-              <polygon points="45,85 55,85 50,92" fill="${bColor}"/>
-              <path d="M50 92 Q45 102 52 112" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-        `;
-      } else {
-        target.innerHTML = `
-          <div class="w-full h-full flex items-center justify-center transition-transform group-hover:scale-105">
-            <svg viewBox="0 0 120 85" class="w-full h-full drop-shadow-md">
-              <path d="M22 44 C12 34 24 16 44 19 C56 10 82 12 94 23 C109 28 112 46 98 56 C103 68 85 77 64 74 C44 78 20 71 17 58 C14 52 17 47 22 44 Z" fill="#78350f" stroke="#451a03" stroke-width="3.5"/>
-              <ellipse cx="55" cy="36" rx="22" ry="8" transform="rotate(-8 55 36)" fill="#a16207" opacity="0.55"/>
-              <circle cx="38" cy="29" r="3.5" fill="#fef08a" opacity="0.7"/>
-              <text x="60" y="53" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="18" fill="#fef3c7">SPLASH!</text>
-            </svg>
-          </div>
-        `;
+      let moverEntry = null;
+      if (gameKey === 'butterflies' || gameKey === 'stars') {
+        const speedBase = gameKey === 'butterflies' ? 1.4 : 1.9;
+        const angle = Math.random() * Math.PI * 2;
+        moverEntry = {
+          el: target,
+          x,
+          y,
+          vx: Math.cos(angle) * speedBase,
+          vy: Math.sin(angle) * speedBase
+        };
+        state.mouseMovers.push(moverEntry);
       }
 
       const handlePop = (e) => {
@@ -1207,7 +1478,6 @@
         const isBonus = Math.random() < 0.25;
         soundEngine.playSplash(isBonus, activeChar.id);
 
-        // Mascot jump reaction
         const mascot = document.getElementById('puddle-mascot');
         if (mascot) {
           mascot.classList.remove('animate-jump');
@@ -1215,21 +1485,27 @@
           mascot.classList.add('animate-jump');
         }
 
-        // Visual splash star burst at target spot
+        const curX = moverEntry ? moverEntry.x : parseFloat(target.style.left) || x;
+        const curY = moverEntry ? moverEntry.y : parseFloat(target.style.top) || y;
+
         const burst = document.createElement('div');
-        burst.className = 'absolute pointer-events-none font-display font-bold text-2xl sm:text-3xl text-amber-500 drop-shadow animate-pop-in z-20';
-        burst.style.left = `${x + size * 0.25}px`;
-        burst.style.top = `${y + size * 0.15}px`;
-        burst.textContent = isBonus ? '✨ +1 ⭐' : (isBouncy ? '🎈 +1 ⭐' : '💦 +1 ⭐');
+        burst.className = 'absolute pointer-events-none font-display font-bold text-xl sm:text-2xl text-amber-500 drop-shadow animate-pop-in z-20';
+        burst.style.left = `${curX + size * 0.2}px`;
+        burst.style.top = `${curY + size * 0.15}px`;
+        burst.textContent = isBonus ? '✨ +1 ⭐' : '🌟 +1 ⭐';
         el.arenaLayer.appendChild(burst);
         setTimeout(() => burst.remove(), 650);
 
+        if (moverEntry) {
+          state.mouseMovers = state.mouseMovers.filter((item) => item !== moverEntry);
+        }
         target.remove();
-        awardStar(1, `${inputType} ${isBonus ? 'Sparkle ' : ''}Pop!`, isBonus);
 
-        // Keep plenty of targets on screen for happy toddlers
-        if (el.arenaLayer.querySelectorAll('.puddle-target').length < 3) {
-          spawnSinglePuddleTarget();
+        awardStar(1, `${inputType} ${gameKey}`);
+        advanceMouseLevelIfReady();
+
+        if (state.mode === 'puddles' && el.arenaLayer.querySelectorAll('.puddle-target').length < 3) {
+          spawnSinglePuddleTarget(getCurrentMouseLevelConfig().key);
         }
       };
 
@@ -1728,6 +2004,7 @@
 
     // --- 11. MODE SWITCHING & TIMERS ---
     function clearModeTimers() {
+      stopMouseMovers();
       clearInterval(state.spawnInterval);
       state.spawnInterval = null;
       state.activeDrag = null;
@@ -1744,8 +2021,8 @@
       el.modeTabs.forEach((tab) => {
         const active = tab.dataset.mode === newMode;
         tab.className = active
-          ? 'mode-tab toy-btn bg-pink-500 text-white rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer ring-4 ring-pink-200'
-          : 'mode-tab toy-btn bg-white hover:bg-amber-50 text-slate-800 rounded-2xl px-3.5 py-3 text-left flex items-center gap-2.5 cursor-pointer border-2 border-amber-200';
+          ? 'mode-tab toy-btn bg-pink-500 text-white rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer ring-2 ring-pink-200'
+          : 'mode-tab toy-btn bg-white hover:bg-amber-50 text-slate-800 rounded-xl px-2.5 py-1.5 sm:px-3 sm:py-2 text-left flex items-center gap-2 cursor-pointer border-2 border-amber-200';
       });
 
       if (newMode === 'puddles') {
