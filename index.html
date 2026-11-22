@@ -415,12 +415,18 @@
 
       <!-- Helpful On-Screen Key & Mouse Trainer Strip (Great for toddlers learning physical keyboard/mouse) -->
       <div id="trainer-footer" class="bg-slate-50 border border-slate-200/80 rounded-xl px-2.5 py-1 flex flex-wrap items-center justify-between gap-2 text-[11px] sm:text-xs font-bold text-slate-600 shrink-0">
-        <div id="trainer-status-left" class="flex items-center gap-1.5 truncate">
+        <div id="trainer-status-left" class="flex items-center gap-1.5 min-w-0">
           <span class="inline-flex items-center justify-center w-5 h-5 rounded-md bg-pink-100 text-pink-700 font-display shrink-0">👆</span>
           <span class="truncate">Tip: Using a <strong>real mouse</strong> or <strong>keyboard</strong> builds big computer skills!</span>
         </div>
-        <div id="last-input-badge" class="bg-white border border-slate-200 rounded-lg px-2.5 py-0.5 font-display text-slate-700 shadow-2xs shrink-0">
-          Last Action: <span id="last-action-text" class="text-pink-600">Ready!</span>
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+          <span class="text-pink-600 font-display">Made for Stella, by Dad, with Love.</span>
+          <a href="https://github.com/jrookpanda/PeppaPigMouseKeyboard" target="_blank" rel="noopener noreferrer" class="underline text-sky-700 hover:text-sky-900">
+            GitHub
+          </a>
+          <div id="last-input-badge" class="bg-white border border-slate-200 rounded-lg px-2.5 py-0.5 font-display text-slate-700 shadow-2xs">
+            Last Action: <span id="last-action-text" class="text-pink-600">Ready!</span>
+          </div>
         </div>
       </div>
     </main>
